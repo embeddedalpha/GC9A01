@@ -335,7 +335,7 @@ void SPI_TRX_Buffer(SPI_Config *config, uint16_t *tx_buffer,uint16_t *rx_buffer,
 		xDMA_TX.peripheral_address = (uint32_t)&(config->Port->DR);
 		xDMA_TX.buffer_length = tx_length;
 		DMA_Set_Target(&xDMA_TX);
-		DMA_Trigger(&xDMA_TX);
+		DMA_Set_Trigger(&xDMA_TX);
 	}
 
 	if(config->dma || SPI_DMA.RX_DMA_Enable)
@@ -344,7 +344,7 @@ void SPI_TRX_Buffer(SPI_Config *config, uint16_t *tx_buffer,uint16_t *rx_buffer,
 		xDMA_TX.peripheral_address = (uint32_t)&(config->Port->DR);
 		xDMA_TX.buffer_length = rx_length;
 		DMA_Set_Target(&xDMA_RX);
-		DMA_Trigger(&xDMA_RX);
+		DMA_Set_Trigger(&xDMA_RX);
 	}
 
 	SPI_Enable(config);
