@@ -16,25 +16,14 @@
  ******************************************************************************
  */
 
-#include <stdint.h>
-
-struct struct_func{
-
-    uint16_t cmd;
-    uint16_t data;
-};
- struct struct_func gc9a01[] = {
-		{0x01, 0x02},
-		{0x04, 0x03},
-};
+#include "main.h"
+#include "Console.h"
 
 int main(void)
 {
-    /* Loop forever */
-
-
-	int g = 0;
-	g = gc9a01[1].cmd;
+	MCU_Clock_Setup();
+	Delay_Config();
+	Console_Init(USART1, 9600);
 
 	for(;;);
 }
