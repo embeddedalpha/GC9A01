@@ -18,12 +18,30 @@
 
 #include "main.h"
 #include "Console.h"
+#include "GC9A01.h"
+
+GC9A01_Typedef display;
 
 int main(void)
 {
 	MCU_Clock_Setup();
 	Delay_Config();
 	Console_Init(USART1, 9600);
+
+	// test this part
+	GC9A01_DeInit(&display);
+
+	display.DC_Port = GPIOA;
+	display.DC_Pin = 3;
+
+	display.Reset_Port = GPIOA;
+	display.Reset_Pin = 2;
+
+	GC9A01_Init(&display);
+
+
+
+
 
 	for(;;);
 }

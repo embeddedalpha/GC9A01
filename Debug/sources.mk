@@ -24,6 +24,7 @@ C_DEPS :=
 SUBDIRS := \
 Console \
 DMA \
+GC9A01 \
 GPIO \
 SPI \
 Src \

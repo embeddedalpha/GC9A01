@@ -16,7 +16,7 @@ S_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Startup/%.o: ../Startup/%.s Startup/subdir.mk
-	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"D:/STM32F407_Firmware/GC9A01_Driver/Console" -I"D:/STM32F407_Firmware/GC9A01_Driver/DMA" -I"D:/STM32F407_Firmware/GC9A01_Driver/GPIO" -I"D:/STM32F407_Firmware/GC9A01_Driver/SPI" -I"D:/STM32F407_Firmware/GC9A01_Driver/USART" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"D:/STM32F407_Firmware/GC9A01_Driver/Console" -I"D:/STM32F407_Firmware/GC9A01_Driver/DMA" -I"D:/STM32F407_Firmware/GC9A01_Driver/GPIO" -I"D:/STM32F407_Firmware/GC9A01_Driver/SPI" -I"D:/STM32F407_Firmware/GC9A01_Driver/USART" -I"D:/STM32F407_Firmware/GC9A01_Driver/GC9A01" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
 
 clean: clean-Startup
 

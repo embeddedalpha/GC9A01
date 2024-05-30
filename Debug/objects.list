@@ -1,5 +1,6 @@
 "./Console/Console.o"
 "./DMA/DMA.o"
+"./GC9A01/GC9A01.o"
 "./GPIO/GPIO.o"
 "./SPI/SPI.o"
 "./Src/main.o"
