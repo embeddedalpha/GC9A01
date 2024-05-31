@@ -34,7 +34,7 @@ static void Command(GC9A01_Typedef *config,uint8_t command)
 	command_line_low(config);
 	SPI_NSS_Low(&(config->SPI_Driver));
 	SPI_TRX_Byte(&(config->SPI_Driver), command);
-	SPI_NSS_Low(&(config->SPI_Driver));
+	SPI_NSS_High(&(config->SPI_Driver));
 }
 
 static void Data(GC9A01_Typedef *config,uint8_t data)
@@ -42,7 +42,7 @@ static void Data(GC9A01_Typedef *config,uint8_t data)
 	command_line_high(config);
 	SPI_NSS_Low(&(config->SPI_Driver));
 	SPI_TRX_Byte(&(config->SPI_Driver), data);
-	SPI_NSS_Low(&(config->SPI_Driver));
+	SPI_NSS_High(&(config->SPI_Driver));
 }
 
 void GC9A01_DeInit(GC9A01_Typedef *config)
@@ -58,6 +58,7 @@ void GC9A01_Init(GC9A01_Typedef *config)
 {
 
 	SPI_Init(&(config->SPI_Driver));
+	SPI_Enable(&(config->SPI_Driver));
 
 	GPIO_Pin_Init(config->DC_Port, config->DC_Pin, MODE.General_Purpose_Output, Output_Type.Push_Pull, Speed.Very_High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.None);
 
@@ -71,8 +72,7 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	reset_line_high(config);
 	Delay_ms(120);
 
-	Command(config,0xEF);
-
+		Command(config,0xEF);
 	    Command(config,0xEB);
 	    Data(config,0x14);
 
@@ -136,7 +136,7 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	#endif
 
 	    Command(config,COLOR_MODE);
-	    Data(config,COLOR_MODE__18_BIT);
+	    Data(config,COLOR_MODE__16_BIT);
 
 	    Command(config,0x90);
 	    Data(config,0x08);
@@ -314,7 +314,26 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	    Delay_ms(20);
 }
 
-void GC9A01_Set_Frame(GC9A01_Typedef *config, struct GC9A01_Frame frame)
+void GC9A01_Write(GC9A01_Typedef *config,uint8_t *data, size_t len) {
+    Command(config, MEM_WR);
+	command_line_high(config);
+	SPI_NSS_Low(&(config->SPI_Driver));
+	for(int i = 0; i < len; i++)
+	SPI_TRX_Byte(&(config->SPI_Driver), data[i]);
+	SPI_NSS_High(&(config->SPI_Driver));
+}
+
+void GC9A01_Write_Continue(GC9A01_Typedef *config,uint8_t *data, size_t len)
+{
+    Command(config, MEM_WR_CONT);
+	command_line_high(config);
+	SPI_NSS_Low(&(config->SPI_Driver));
+	for(int i = 0; i < len; i++)
+	SPI_TRX_Byte(&(config->SPI_Driver), data[i]);
+	SPI_NSS_High(&(config->SPI_Driver));
+}
+
+void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame)
 {
 	uint8_t data[4];
 	Command(config, COL_ADDR_SET);
@@ -322,6 +341,14 @@ void GC9A01_Set_Frame(GC9A01_Typedef *config, struct GC9A01_Frame frame)
     data[1] = frame.start.X & 0xFF;
     data[2] = (frame.end.X >> 8) & 0xFF;
     data[3] = frame.end.X & 0xFF;
+    GC9A01_Write(config, data, 4);
 
+	Command(config, ROW_ADDR_SET);
+    data[0] = (frame.start.Y >> 8) & 0xFF;
+    data[1] = frame.start.Y & 0xFF;
+    data[2] = (frame.end.Y >> 8) & 0xFF;
+    data[3] = frame.end.Y & 0xFF;
+    GC9A01_Write(config, data, 4);
 
 }
+

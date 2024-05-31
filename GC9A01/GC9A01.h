@@ -48,6 +48,8 @@ struct GC9A01_frame {
 
 void GC9A01_DeInit(GC9A01_Typedef *config);
 void GC9A01_Init(GC9A01_Typedef *config);
-void GC9A01_Set_Frame(GC9A01_Typedef *config, struct GC9A01_Frame frame);
+void GC9A01_Write(GC9A01_Typedef *config,uint8_t *data, size_t len);
+void GC9A01_Write_Continue(GC9A01_Typedef *config,uint8_t *data, size_t len);
+void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame);
 
 #endif /* GC9A01_H_ */
