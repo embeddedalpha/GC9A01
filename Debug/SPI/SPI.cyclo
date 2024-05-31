@@ -3,9 +3,9 @@
 ../SPI/SPI.c:36:8:SPI_Config_Reset	4
 ../SPI/SPI.c:61:13:SPI_Pin	55
 ../SPI/SPI.c:185:6:SPI_Init	11
-../SPI/SPI.c:302:6:SPI_Enable	1
-../SPI/SPI.c:309:6:SPI_DeInit	4
-../SPI/SPI.c:317:10:SPI_TRX_Byte	5
-../SPI/SPI.c:330:6:SPI_TRX_Buffer	8
-../SPI/SPI.c:362:6:SPI_NSS_High	1
-../SPI/SPI.c:367:6:SPI_NSS_Low	1
+../SPI/SPI.c:303:6:SPI_Enable	1
+../SPI/SPI.c:310:6:SPI_DeInit	4
+../SPI/SPI.c:318:10:SPI_TRX_Byte	5
+../SPI/SPI.c:331:6:SPI_TRX_Buffer	8
+../SPI/SPI.c:363:6:SPI_NSS_High	1
+../SPI/SPI.c:368:6:SPI_NSS_Low	1

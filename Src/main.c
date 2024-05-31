@@ -19,6 +19,7 @@
 #include "main.h"
 #include "Console.h"
 #include "GC9A01.h"
+#include "math.h"
 
 GC9A01_Typedef display;
 
@@ -27,9 +28,27 @@ int main(void)
 	MCU_Clock_Setup();
 	Delay_Config();
 	Console_Init(USART1, 9600);
+	Delay_s(2);
 
 	// test this part
-	GC9A01_DeInit(&display);
+//	GC9A01_DeInit(&display);
+
+	display.SPI_Driver.NSS_Pin = 1;
+	display.SPI_Driver.NSS_Port = GPIOA;
+	display.SPI_Driver.Port = SPI1;
+	display.SPI_Driver.clock_phase = SPI_Clock_Phase.Low_0;
+	display.SPI_Driver.clock_pin = SPI1_CLK.PA5;
+	display.SPI_Driver.clock_polarity = SPI_Clock_Polarity.Low_0;
+	display.SPI_Driver.crc = SPI_CRC.Disable;
+	display.SPI_Driver.data_format = SPI_Data_Format.Bit8;
+	display.SPI_Driver.dma = SPI_DMA.RX_DMA_Disable;
+	display.SPI_Driver.frame_format = SPI_Frame_Format.MSB_First;
+	display.SPI_Driver.interrupt = SPI_Interrupt.Disable;
+	display.SPI_Driver.miso_pin = SPI1_MISO.PA6;
+	display.SPI_Driver.mode = SPI_Mode.Full_Duplex_Master;
+	display.SPI_Driver.mosi_pin = SPI1_MOSI.PA7;
+	display.SPI_Driver.prescaler = SPI_Prescaler.CLK_div_2;
+	display.SPI_Driver.type = SPI_Type.Master;
 
 	display.DC_Port = GPIOA;
 	display.DC_Pin = 3;
@@ -39,9 +58,32 @@ int main(void)
 
 	GC9A01_Init(&display);
 
+    struct GC9A01_frame frame = {{0,0},{239,239}};
+    GC9A01_Set_Frame(&display,frame);
+    uint8_t color[3];
 
 
 
 
-	for(;;);
+
+
+
+	for(;;)
+	{
+	    float frequency = 0.026;
+	    for (int x = 0; x < 240; x++) {
+	        color[0] = sin(frequency*x + 0) * 127 + 128;
+	        color[1] = sin(frequency*x + 2) * 127 + 128;
+	        color[2] = sin(frequency*x + 4) * 127 + 128;
+	        for (int y = 0; y < 240; y++) {
+	            if (x == 0 && y == 0) {
+	                GC9A01_Write(&display,color, sizeof(color));
+	            } else {
+	                GC9A01_Write_Continue(&display,color, sizeof(color));
+	            }
+	        }
+	    }
+
+	    Delay_us(1000);
+	}
 }
