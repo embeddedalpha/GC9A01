@@ -198,6 +198,7 @@ void SPI_Init(SPI_Config *config)
 					config->type | config->frame_format |
 					config->data_format | config->crc ;
 	config->Port->CR2 |= config->dma | config->interrupt;
+	config->Port->CR1 |= config->mode | config->type;
 
 //	if(config->Port == SPI1)config->speed = (SystemCoreClock/2)/(2*2^(config->prescaler));
 //	else config->speed = (SystemCoreClock/4)/(2*2^(config->prescaler));
