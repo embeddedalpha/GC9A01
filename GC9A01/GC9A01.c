@@ -27,6 +27,7 @@ static void reset_line_high(GC9A01_Typedef *config)
 static void reset_line_low(GC9A01_Typedef *config)
 {
 	GPIO_Pin_Low(config->Reset_Port, config->Reset_Pin);
+
 }
 
 static void Command(GC9A01_Typedef *config,uint8_t command)
@@ -70,6 +71,8 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	reset_line_low(config);
 	Delay_ms(10);
 	reset_line_high(config);
+//	GPIOA -> BSRR |= 1 << 2;
+
 	Delay_ms(120);
 
 		Command(config,0xEF);
@@ -136,7 +139,7 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	#endif
 
 	    Command(config,COLOR_MODE);
-	    Data(config,COLOR_MODE__16_BIT);
+	    Data(config,COLOR_MODE__18_BIT);
 
 	    Command(config,0x90);
 	    Data(config,0x08);
