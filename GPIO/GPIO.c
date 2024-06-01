@@ -68,13 +68,13 @@ void GPIO_Interrupt_Setup(int pin, int edge_select, uint32_t priority)
 
 void GPIO_Pin_High(GPIO_TypeDef *Port, int pin)
 {
-	Port -> ODR = 1 << pin;
+	Port -> BSRR = 1 << pin;
 }
 
 
 void GPIO_Pin_Low(GPIO_TypeDef *Port, int pin)
 {
-	Port -> ODR &= ~(1 << pin);
+	Port -> BSRR = (1 << (pin+16));
 }
 
 
