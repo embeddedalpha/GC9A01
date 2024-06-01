@@ -3,10 +3,10 @@
 ../GC9A01/GC9A01.c:17:13:command_line_low	16	static
 ../GC9A01/GC9A01.c:22:13:reset_line_high	16	static
 ../GC9A01/GC9A01.c:27:13:reset_line_low	16	static
-../GC9A01/GC9A01.c:32:13:Command	16	static
-../GC9A01/GC9A01.c:40:13:Data	16	static
-../GC9A01/GC9A01.c:48:6:GC9A01_DeInit	16	static
-../GC9A01/GC9A01.c:57:6:GC9A01_Init	48	static
-../GC9A01/GC9A01.c:317:6:GC9A01_Write	32	static
-../GC9A01/GC9A01.c:326:6:GC9A01_Write_Continue	32	static
-../GC9A01/GC9A01.c:336:6:GC9A01_Set_Frame	32	static
+../GC9A01/GC9A01.c:33:13:Command	16	static
+../GC9A01/GC9A01.c:41:13:Data	16	static
+../GC9A01/GC9A01.c:49:6:GC9A01_DeInit	16	static
+../GC9A01/GC9A01.c:58:6:GC9A01_Init	48	static
+../GC9A01/GC9A01.c:320:6:GC9A01_Write	32	static
+../GC9A01/GC9A01.c:329:6:GC9A01_Write_Continue	32	static
+../GC9A01/GC9A01.c:339:6:GC9A01_Set_Frame	32	static
