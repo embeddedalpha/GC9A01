@@ -13,6 +13,7 @@ RM := rm -rf
 -include Startup/subdir.mk
 -include Src/subdir.mk
 -include SPI/subdir.mk
+-include SDIO/subdir.mk
 -include GPIO/subdir.mk
 -include GC9A01/subdir.mk
 -include DMA/subdir.mk

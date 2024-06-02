@@ -47,7 +47,7 @@ int main(void)
 	display.SPI_Driver.miso_pin = SPI1_MISO.PA6;
 	display.SPI_Driver.mode = SPI_Mode.Full_Duplex_Master;
 	display.SPI_Driver.mosi_pin = SPI1_MOSI.PA7;
-	display.SPI_Driver.prescaler = SPI_Prescaler.CLK_div_16;
+	display.SPI_Driver.prescaler = SPI_Prescaler.CLK_div_2;
 	display.SPI_Driver.type = SPI_Type.Master;
 
 	display.DC_Port = GPIOA;
@@ -58,7 +58,7 @@ int main(void)
 
 	GC9A01_Init(&display);
 
-    struct GC9A01_frame frame = {{0,0},{240,240}};
+    struct GC9A01_frame frame = {{100,100},{200,200}};
     GC9A01_Set_Frame(&display,frame);
     uint8_t color[3];
 
@@ -66,16 +66,18 @@ int main(void)
 
 
 
+    uint8_t width = 240;
+    uint8_t height = 240;
 
 
 
 	for(;;)
 	{
-		color[0] = 0x12;
-		color[1] = 0x67;
-		color[2] = 0xa6;
-		for (int x = 0; x < 240; x++) {
-            for (int y = 0; y < 240; y++)
+		color[0] = 0x32;
+		color[1] = 0xcd;
+		color[2] = 0x32;
+		for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++)
             {
                 if (x == 0 && y == 0)
                 {
@@ -86,13 +88,13 @@ int main(void)
                 }
             }
         }
-//            Delay_s(2);
+            Delay_s(2);
 
-    		color[0] = 0xEa;
-    		color[1] = 0x99;
-    		color[2] = 0x99;
-    		for (int x = 0; x < 240; x++) {
-                for (int y = 0; y < 240; y++)
+    		color[0] = 0xE0;
+    		color[1] = 0x21;
+    		color[2] = 0x8a;
+    		for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++)
                 {
                     if (x == 0 && y == 0) {
                     	GC9A01_Write(&display,color, sizeof(color));
@@ -101,13 +103,13 @@ int main(void)
                     }
                 }
             }
-//                Delay_s(2);
+                Delay_s(2);
 
-        		color[0] = 0x59;
-        		color[1] = 0xcc;
-        		color[2] = 0x27;
-        		for (int x = 0; x < 240; x++) {
-                    for (int y = 0; y < 240; y++)
+        		color[0] = 0x00;
+        		color[1] = 0x04;
+        		color[2] = 0x35;
+        		for (int x = 0; x < width; x++) {
+                    for (int y = 0; y < height; y++)
                     {
                         if (x == 0 && y == 0) {
                         	GC9A01_Write(&display,color, sizeof(color));
@@ -116,42 +118,6 @@ int main(void)
                         }
                     }
                 }
-//                    Delay_s(2);
-
-
-//	    float frequency = 0.026;
-//	    for (int x = 0; x < 240; x++) {
-//	        color[0] = 0xff;
-//	        color[1] = 0x00;
-//	        color[2] = 0xff;
-//	        for (int y = 0; y < 240; y++) {
-//	            if (x == 0 && y == 0) {
-//	                GC9A01_Write(&display,color, sizeof(color));
-//	            } else {
-//	                GC9A01_Write_Continue(&display,color, sizeof(color));
-//	            }
-//	        }
-//	    }
-
-//	    Delay_us(1000);
-
-//	    color[0] = 0x00;
-//	        for (int x = 0; x < 240; x++) {
-//	            for (int y = 0; y < 240; y++) {
-//	                if ((x >= 1*48 && x < 4*48 && y >= 2*48 && y < 3*48) ||
-//	                    (x >= 2*48 && x < 3*48 && y >= 1*48 && y < 4*48)) {
-//	                    color[1] = 0xff;
-//	                    color[2] = 0xff;
-//	                } else {
-//	                    color[1] = 0x00;
-//	                    color[2] = 0x00;
-//	                }
-//	                if (x == 0 && y == 0) {
-//	                	GC9A01_Write(&display,color, sizeof(color));
-//	                } else {
-//	                	GC9A01_Write_Continue(&display,color, sizeof(color));
-//	                }
-//	            }
-//	        }
+                    Delay_s(2);
 	}
 }

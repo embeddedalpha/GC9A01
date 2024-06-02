@@ -26,6 +26,7 @@ Console \
 DMA \
 GC9A01 \
 GPIO \
+SDIO \
 SPI \
 Src \
 Startup \

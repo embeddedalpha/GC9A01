@@ -5,23 +5,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Console/Console.c 
+../SDIO/SDIO.c 
 
 OBJS += \
-./Console/Console.o 
+./SDIO/SDIO.o 
 
 C_DEPS += \
-./Console/Console.d 
+./SDIO/SDIO.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Console/%.o Console/%.su Console/%.cyclo: ../Console/%.c Console/subdir.mk
+SDIO/%.o SDIO/%.su SDIO/%.cyclo: ../SDIO/%.c SDIO/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F407VGTx -c -I../Inc -I"D:/STM32F407_Firmware/GC9A01_Driver/Console" -I"D:/STM32F407_Firmware/GC9A01_Driver/DMA" -I"D:/STM32F407_Firmware/GC9A01_Driver/GPIO" -I"D:/STM32F407_Firmware/GC9A01_Driver/SPI" -I"D:/STM32F407_Firmware/GC9A01_Driver/USART" -I"D:/STM32F407_Firmware/GC9A01_Driver/GC9A01" -I"D:/STM32F407_Firmware/GC9A01_Driver/SDIO" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
-clean: clean-Console
+clean: clean-SDIO
 
-clean-Console:
-	-$(RM) ./Console/Console.cyclo ./Console/Console.d ./Console/Console.o ./Console/Console.su
+clean-SDIO:
+	-$(RM) ./SDIO/SDIO.cyclo ./SDIO/SDIO.d ./SDIO/SDIO.o ./SDIO/SDIO.su
 
-.PHONY: clean-Console
+.PHONY: clean-SDIO
 
