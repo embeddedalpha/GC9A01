@@ -88,7 +88,7 @@ int main(void)
                 }
             }
         }
-            Delay_s(2);
+//            Delay_s(1);
 
     		color[0] = 0xE0;
     		color[1] = 0x21;
@@ -103,7 +103,7 @@ int main(void)
                     }
                 }
             }
-                Delay_s(2);
+//                Delay_s(1);
 
         		color[0] = 0x00;
         		color[1] = 0x04;
@@ -118,6 +118,6 @@ int main(void)
                         }
                     }
                 }
-                    Delay_s(2);
+//                    Delay_s(1);
 	}
 }
