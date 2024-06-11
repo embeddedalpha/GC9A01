@@ -338,20 +338,60 @@ void GC9A01_Write_Continue(GC9A01_Typedef *config,uint8_t *data, size_t len)
 
 void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame)
 {
-	uint8_t data[4];
-	Command(config, COL_ADDR_SET);
-    data[0] = (frame.start.X >> 8) & 0xFF;
-    data[1] = frame.start.X & 0xFF;
-    data[2] = (frame.end.X >> 8) & 0xFF;
-    data[3] = frame.end.X & 0xFF;
-    GC9A01_Write(config, data, 4);
+	uint8_t datax[4], datay[4];
 
-	Command(config, ROW_ADDR_SET);
-    data[0] = (frame.start.Y >> 8) & 0xFF;
-    data[1] = frame.start.Y & 0xFF;
-    data[2] = (frame.end.Y >> 8) & 0xFF;
-    data[3] = frame.end.Y & 0xFF;
-    GC9A01_Write(config, data, 4);
+    datax[0] = (frame.start.X >> 8) & 0xFF;
+    datax[1] = frame.start.X & 0xFF;
+    datax[2] = (frame.end.X >> 8) & 0xFF;
+    datax[3] = frame.end.X & 0xFF;
+    SPI_NSS_Low(&(config->SPI_Driver));
+	command_line_low(config);
+	SPI_TRX_Byte(&(config->SPI_Driver), COL_ADDR_SET);
+	command_line_high(config);
+	SPI_TRX_Byte(&(config->SPI_Driver), datax[0]);
+	SPI_TRX_Byte(&(config->SPI_Driver), datax[1]);
+	SPI_TRX_Byte(&(config->SPI_Driver), datax[2]);
+	SPI_TRX_Byte(&(config->SPI_Driver), datax[3]);
+	SPI_NSS_High(&(config->SPI_Driver));
 
+
+    datay[0] = (frame.start.Y >> 8) & 0xFF;
+    datay[1] = frame.start.Y & 0xFF;
+    datay[2] = (frame.end.Y >> 8) & 0xFF;
+    datay[3] = frame.end.Y & 0xFF;
+    SPI_NSS_Low(&(config->SPI_Driver));
+	command_line_low(config);
+	SPI_TRX_Byte(&(config->SPI_Driver), ROW_ADDR_SET);
+	command_line_high(config);
+	SPI_TRX_Byte(&(config->SPI_Driver), datay[0]);
+	SPI_TRX_Byte(&(config->SPI_Driver), datay[1]);
+	SPI_TRX_Byte(&(config->SPI_Driver), datay[2]);
+	SPI_TRX_Byte(&(config->SPI_Driver), datay[3]);
+	SPI_NSS_High(&(config->SPI_Driver));
+
+//	Command(config, 0x2c);
+	Command(config, MEM_WR);
 }
 
+
+
+void GC9A01_Draw_Pixel(GC9A01_Typedef *config,uint8_t x,uint8_t y, uint32_t color)
+{
+	uint8_t temp[3];
+	struct GC9A01_frame frame;
+	frame.start.X = x;
+	frame.start.Y = y;
+	frame.end.X = x;
+	frame.end.Y = y;
+	GC9A01_Set_Frame(config, frame);
+	temp[0] = (color & 0xFF0000) >> 16;
+	temp[1] = (color & 0x00FF00) >> 8;
+	temp[2] = (color & 0x0000FF) >> 0;
+
+//	GC9A01_Write_Continue(config, temp, sizeof(temp));
+	command_line_high(config);
+	SPI_NSS_Low(&(config->SPI_Driver));
+	for(int i = 0; i < 3; i++)
+	SPI_TRX_Byte(&(config->SPI_Driver), temp[i]);
+	SPI_NSS_High(&(config->SPI_Driver));
+}
