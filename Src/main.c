@@ -22,13 +22,18 @@
 #include "math.h"
 
 GC9A01_Typedef display;
+struct GC9A01_frame frame;
+
+struct GC9A01_frame frame1;
+struct GC9A01_frame frame2;
+struct GC9A01_frame frame3;
 
 int main(void)
 {
 	MCU_Clock_Setup();
 	Delay_Config();
 	Console_Init(USART1, 9600);
-	Delay_s(2);
+//	Delay_s(2);
 
 	// test this part
 //	GC9A01_DeInit(&display);
@@ -57,25 +62,62 @@ int main(void)
 	display.Reset_Pin = 2;
 
 	GC9A01_Init(&display);
+	uint8_t color[3];
 
-    struct GC9A01_frame frame = {{100,100},{200,200}};
-    GC9A01_Set_Frame(&display,frame);
-    uint8_t color[3];
+	frame.start.X = 0;
+	frame.start.Y =  0;
+	frame.end.X = 240;
+	frame.end.Y = 240;
+	GC9A01_Set_Frame(&display,frame);
+
+	color[0] = 0xff;
+	color[1] = 0x00;
+	color[2] = 0xff;
+	for (int x = 0; x < 240; x++) {
+        for (int y = 0; y < 240; y++)
+        {
+            if (x == 0 && y == 0)
+            {
+            	GC9A01_Write(&display,color, sizeof(color));
+            } else
+            {
+            	GC9A01_Write_Continue(&display,color, sizeof(color));
+            }
+        }
+    }
 
 
 
 
 
-    uint8_t width = 240;
-    uint8_t height = 240;
 
+
+
+
+    uint8_t width = 50;
+    uint8_t height = 50;
+
+
+
+
+
+//		uint32_t rgb = 0xFFFFFF;
+//		GC9A01_Draw_Pixel(&display, 124, 124, rgb);
+//		GC9A01_Draw_Pixel(&display, 150, 150, rgb);
+//		Delay_ms(900);
 
 
 	for(;;)
 	{
-		color[0] = 0x32;
-		color[1] = 0xcd;
-		color[2] = 0x32;
+		frame1.start.X = 40;
+		frame1.start.Y =  70;
+		frame1.end.X = frame1.start.X + width;
+		frame1.end.Y = frame1.start.Y + height;
+		GC9A01_Set_Frame(&display,frame1);
+
+		color[0] = 0x00;
+		color[1] = 0x00;
+		color[2] = 0x00;
 		for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++)
             {
@@ -88,11 +130,11 @@ int main(void)
                 }
             }
         }
-//            Delay_s(1);
+            Delay_s(1);
 
-    		color[0] = 0xE0;
-    		color[1] = 0x21;
-    		color[2] = 0x8a;
+    		color[0] = 0xff;
+    		color[1] = 0xff;
+    		color[2] = 0xff;
     		for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++)
                 {
@@ -103,11 +145,18 @@ int main(void)
                     }
                 }
             }
-//                Delay_s(1);
+                Delay_s(1);
 
-        		color[0] = 0x00;
-        		color[1] = 0x04;
-        		color[2] = 0x35;
+
+        		frame2.start.X = frame1.start.X + 120;
+        		frame2.start.Y = frame1.start.Y ;
+        		frame2.end.X = frame2.start.X + width;
+        		frame2.end.Y = frame2.start.Y + height;
+        		GC9A01_Set_Frame(&display,frame2);
+
+        		color[0] = 0xff;
+        		color[1] = 0xff;
+        		color[2] = 0xff;
         		for (int x = 0; x < width; x++) {
                     for (int y = 0; y < height; y++)
                     {
@@ -118,6 +167,25 @@ int main(void)
                         }
                     }
                 }
-//                    Delay_s(1);
+                    Delay_s(1);
+
+            		color[0] = 0x00;
+            		color[1] = 0x00;
+            		color[2] = 0x00;
+            		for (int x = 0; x < width; x++) {
+                        for (int y = 0; y < height; y++)
+                        {
+                            if (x == 0 && y == 0) {
+                            	GC9A01_Write(&display,color, sizeof(color));
+                            } else {
+                            	GC9A01_Write_Continue(&display,color, sizeof(color));
+                            }
+                        }
+                    }
+                        Delay_s(1);
+
+
+
+
 	}
 }

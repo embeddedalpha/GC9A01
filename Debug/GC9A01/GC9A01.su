@@ -10,3 +10,4 @@
 ../GC9A01/GC9A01.c:320:6:GC9A01_Write	32	static
 ../GC9A01/GC9A01.c:329:6:GC9A01_Write_Continue	32	static
 ../GC9A01/GC9A01.c:339:6:GC9A01_Set_Frame	32	static
+../GC9A01/GC9A01.c:378:6:GC9A01_Draw_Pixel	40	static
