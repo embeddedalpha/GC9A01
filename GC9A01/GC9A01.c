@@ -202,31 +202,28 @@ void GC9A01_Init(GC9A01_Typedef *config)
 //	    Data(config,0x00);
 //	    Data(config,0x00);
 		data[0] = 0x00;
-		data[1] = 0x00;
+		data[1] = 0x20; //0x00
 		Write_Command(config, 0xb6, 1, data, 2);
 
 
 
-
-
-	#if ORIENTATION == 0
-	    Data(config,0x18);
-	#elif ORIENTATION == 1
-	    Data(config,0x28);
-	#elif ORIENTATION == 2
-//	    Command(config,0x36);
-//	    Data(config,0x48);
-
 	    data[0] = 0x48;
 		Write_Command(config, 0x36, 1, data, 1);
 
-	#else
-	    Data(config,0x88);
-	#endif
+//	#if ORIENTATION == 0
+//	    Data(config,0x18);
+//	#elif ORIENTATION == 1
+//	    Data(config,0x28);
+//	#elif ORIENTATION == 2
+////	    Command(config,0x36);
+////	    Data(config,0x48);
+//	#else
+//	    Data(config,0x88);
+//	#endif
 
 //	    Command(config,COLOR_MODE);
 //	    Data(config,COLOR_MODE__18_BIT);
-	    data[0] = COLOR_MODE__18_BIT;
+	    data[0] = 0x05;
 		Write_Command(config, COLOR_MODE, 1, data, 1);
 
 
@@ -492,39 +489,15 @@ void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame)
     datax[2] = (frame.end.X >> 8) & 0xFF;
     datax[3] = frame.end.X & 0xFF;
 
-
     Write_Command(config, COL_ADDR_SET, 1, datax, 4);
-
-//    SPI_NSS_Low(&(config->SPI_Driver));
-//	command_line_low(config);
-//	SPI_TRX_Byte(&(config->SPI_Driver), COL_ADDR_SET);
-//	command_line_high(config);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datax[0]);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datax[1]);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datax[2]);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datax[3]);
-//	SPI_NSS_High(&(config->SPI_Driver));
-
 
     datay[0] = (frame.start.Y >> 8) & 0xFF;
     datay[1] = frame.start.Y & 0xFF;
     datay[2] = (frame.end.Y >> 8) & 0xFF;
     datay[3] = frame.end.Y & 0xFF;
-//    SPI_NSS_Low(&(config->SPI_Driver));
-//	command_line_low(config);
-//	SPI_TRX_Byte(&(config->SPI_Driver), ROW_ADDR_SET);
-//	command_line_high(config);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datay[0]);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datay[1]);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datay[2]);
-//	SPI_TRX_Byte(&(config->SPI_Driver), datay[3]);
-//	SPI_NSS_High(&(config->SPI_Driver));
 
     Write_Command(config, ROW_ADDR_SET, 1, datay, 4);
 
-//	Command(config, 0x2c);
-//	Command(config, MEM_WR);
-	Write_Command(config, MEM_WR, 0, NULL, 0);
 }
 
 
