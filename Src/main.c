@@ -28,6 +28,8 @@ struct GC9A01_frame frame1;
 struct GC9A01_frame frame2;
 struct GC9A01_frame frame3;
 
+volatile uint16_t buffer[240][240];
+
 int main(void)
 {
 	MCU_Clock_Setup();

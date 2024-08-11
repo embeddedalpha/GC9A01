@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00005004  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00008a88  00000000  00000000  00005034  2**0
+ 13 .debug_info   00008ab9  00000000  00000000  00005034  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00000f98  00000000  00000000  0000dabc  2**0
+ 14 .debug_abbrev 00000f98  00000000  00000000  0000daed  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 000002d8  00000000  00000000  0000ea58  2**3
+ 15 .debug_aranges 000002d8  00000000  00000000  0000ea88  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000208  00000000  00000000  0000ed30  2**0
+ 16 .debug_rnglists 00000208  00000000  00000000  0000ed60  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0001a65f  00000000  00000000  0000ef38  2**0
+ 17 .debug_macro  0001a65f  00000000  00000000  0000ef68  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00006321  00000000  00000000  00029597  2**0
+ 18 .debug_line   00006321  00000000  00000000  000295c7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0008efb9  00000000  00000000  0002f8b8  2**0
+ 19 .debug_str    0008efb9  00000000  00000000  0002f8e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  000be871  2**0
+ 20 .comment      00000043  00000000  00000000  000be8a1  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00000cac  00000000  00000000  000be8b4  2**2
+ 21 .debug_frame  00000cac  00000000  00000000  000be8e4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000004d  00000000  00000000  000bf560  2**0
+ 22 .debug_line_str 0000004d  00000000  00000000  000bf590  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5003,9 +5003,9 @@ __STATIC_INLINE uint32_t Delay_s(unsigned long s)
  80026ae:	bd80      	pop	{r7, pc}
 
 080026b0 <main>:
-struct GC9A01_frame frame1;
-struct GC9A01_frame frame2;
 struct GC9A01_frame frame3;
+
+volatile uint16_t buffer[240][240];
 
 int main(void)
 {

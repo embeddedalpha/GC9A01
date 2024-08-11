@@ -931,6 +931,7 @@ Discarded input sections
                 0x00000000       0x10 ./Src/main.o
  .bss.frame1    0x00000000        0x8 ./Src/main.o
  .bss.frame3    0x00000000        0x8 ./Src/main.o
+ .bss.buffer    0x00000000    0x1c200 ./Src/main.o
  .debug_macro   0x00000000      0xaba ./Src/main.o
  .debug_macro   0x00000000       0x2f ./Src/main.o
  .debug_macro   0x00000000       0x22 ./Src/main.o
@@ -2224,16 +2225,16 @@ LOAD B:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD B:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD B:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000     0x8a88
+.debug_info     0x00000000     0x8ab9
  .debug_info    0x00000000     0x100b ./Console/Console.o
  .debug_info    0x0000100b      0x8ea ./DMA/DMA.o
  .debug_info    0x000018f5     0x16e3 ./GC9A01/GC9A01.o
  .debug_info    0x00002fd8      0xdf1 ./GPIO/GPIO.o
  .debug_info    0x00003dc9     0x16d6 ./SPI/SPI.o
- .debug_info    0x0000549f     0x1d8e ./Src/main.o
- .debug_info    0x0000722d      0x50b ./Src/system_stm32f4xx.o
- .debug_info    0x00007738       0x30 ./Startup/startup_stm32f407vgtx.o
- .debug_info    0x00007768     0x1320 ./USART/USART.o
+ .debug_info    0x0000549f     0x1dbf ./Src/main.o
+ .debug_info    0x0000725e      0x50b ./Src/system_stm32f4xx.o
+ .debug_info    0x00007769       0x30 ./Startup/startup_stm32f407vgtx.o
+ .debug_info    0x00007799     0x1320 ./USART/USART.o
 
 .debug_abbrev   0x00000000      0xf98
  .debug_abbrev  0x00000000      0x1e9 ./Console/Console.o
@@ -2370,7 +2371,7 @@ LOAD B:/ST/STM32CubeIDE_1.15.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_str     0x0008ec63       0x98 ./SPI/SPI.o
                               0x8e34c (size before relaxing)
  .debug_str     0x0008ecfb       0xe4 ./Src/main.o
-                              0x8e984 (size before relaxing)
+                              0x8e98b (size before relaxing)
  .debug_str     0x0008eddf       0x99 ./Src/system_stm32f4xx.o
                               0x882fb (size before relaxing)
  .debug_str     0x0008ee78       0x3f ./Startup/startup_stm32f407vgtx.o
