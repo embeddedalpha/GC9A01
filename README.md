@@ -4,9 +4,9 @@ This repository contains a comprehensive library for interfacing with the GC9A01
 
 ## Versions
 
-- **Version 1**
+- [**Version 1**](https://github.com/embeddedalpha/GC9A01/tree/main/V1)
 
-- **Version 2** (Latest)
+- [**Version 2**](https://github.com/embeddedalpha/GC9A01/tree/main/V2)
 
 ## Features
 
