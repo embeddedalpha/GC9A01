@@ -8,7 +8,9 @@
 ../GC9A01/GC9A01.c:49:6:GC9A01_DeInit	16	static
 ../GC9A01/GC9A01.c:58:13:Write_Command	32	static
 ../GC9A01/GC9A01.c:75:6:GC9A01_Init	64	static
-../GC9A01/GC9A01.c:465:6:GC9A01_Write	40	static
-../GC9A01/GC9A01.c:475:6:GC9A01_Write_Continue	40	static
-../GC9A01/GC9A01.c:486:6:GC9A01_Set_Frame	40	static
-../GC9A01/GC9A01.c:532:6:GC9A01_Draw_Pixel	40	static
+../GC9A01/GC9A01.c:458:6:GC9A01_Write	40	static
+../GC9A01/GC9A01.c:468:6:GC9A01_Write_Continue	40	static
+../GC9A01/GC9A01.c:479:6:GC9A01_Set_Window	40	static
+../GC9A01/GC9A01.c:493:6:GC9A01_Draw_Point	40	static
+../GC9A01/GC9A01.c:503:6:GC9A01_Set_Frame	40	static
+../GC9A01/GC9A01.c:527:6:GC9A01_Draw_Pixel	40	static

@@ -8,6 +8,9 @@
 #include "GC9A01.h"
 
 
+DMA_Config gc9a01;
+
+
 
 static void command_line_high(GC9A01_Typedef *config)
 {
@@ -104,18 +107,12 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	uint8_t data[15];
 
 	Write_Command(config, 0xEF, 0, NULL, 0);
+
 	data[0] = 0x14;
 	Write_Command(config, 0xEB, 1, data, 1);
 
-//		Command(config,0xEF);
-//	    Command(config,0xEB);
-//	    Data(config,0x14);
-
-//	    Command(config,0xFE);
-//	    Command(config,0xEF);
-
-		Write_Command(config, 0xFE, 0, NULL, 0);
-		Write_Command(config, 0xEF, 0, NULL, 0);
+	Write_Command(config, 0xFE, 0, NULL, 0);
+	Write_Command(config, 0xEF, 0, NULL, 0);
 
 //	    Command(config,0xEB);
 //	    Data(config,0x14);
@@ -202,7 +199,7 @@ void GC9A01_Init(GC9A01_Typedef *config)
 //	    Data(config,0x00);
 //	    Data(config,0x00);
 		data[0] = 0x00;
-		data[1] = 0x20; //0x00
+		data[1] = 0x00; //0x00
 		Write_Command(config, 0xb6, 1, data, 2);
 
 
@@ -223,7 +220,7 @@ void GC9A01_Init(GC9A01_Typedef *config)
 
 //	    Command(config,COLOR_MODE);
 //	    Data(config,COLOR_MODE__18_BIT);
-	    data[0] = 0x05;
+	    data[0] = COLOR_MODE__18_BIT;
 		Write_Command(config, COLOR_MODE, 1, data, 1);
 
 
@@ -317,16 +314,16 @@ void GC9A01_Init(GC9A01_Typedef *config)
 		Write_Command(config, 0xCD, 1, data, 1);
 
 
-	    data[0] = 0x07;
-	    data[1] = 0x07;
-	    data[2] = 0x04;
-	    data[3] = 0x0e;
-	    data[4] = 0x0f;
-	    data[5] = 0x09;
-	    data[6] = 0x07;
-	    data[7] = 0x08;
-	    data[8] = 0x03;
-		Write_Command(config, 0x70, 1, data, 9);
+//	    data[0] = 0x07;
+//	    data[1] = 0x07;
+//	    data[2] = 0x04;
+//	    data[3] = 0x0e;
+//	    data[4] = 0x0f;
+//	    data[5] = 0x09;
+//	    data[6] = 0x07;
+//	    data[7] = 0x08;
+//	    data[8] = 0x03;
+//		Write_Command(config, 0x70, 1, data, 9);
 
 
 	    data[0] = 0x34;
@@ -451,11 +448,13 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	    Write_Command(config, 0x21, 0, NULL, 0);
 
 
-//	    Command(config,0x11);
-	    Write_Command(config, 0x11, 0, NULL, 0);
+	    data[0] = 0x80;
+	    Write_Command(config, 0x11, 1, data, 1);
 	    Delay_ms(120);
-//	    Command(config,0x29);
-	    Write_Command(config, 0x29, 0, NULL, 0);
+
+	    data[0] = 0x80;
+	    data[1] = 0x00;
+	    Write_Command(config, 0x29, 1, data, 2);
 	    Delay_ms(20);
 }
 
@@ -480,6 +479,30 @@ void GC9A01_Write_Continue(GC9A01_Typedef *config,uint8_t *data, size_t len)
 	SPI_NSS_High(&(config->SPI_Driver));
 }
 
+void GC9A01_Set_Window(GC9A01_Typedef *config,uint16_t x1, uint16_t y1, uint16_t w,
+        uint16_t h)
+{
+	uint8_t data[2];
+	data[0] = x1;
+	data[1] = (x1 + w - 1);
+	Write_Command(config, COL_ADDR_SET, 1, data, 2);
+
+	data[0] = y1;
+	data[1] = (y1 + h - 1);
+	Write_Command(config, ROW_ADDR_SET, 1, data, 2);
+	Write_Command(config, 0x2C, 0, NULL, 0);
+}
+
+void GC9A01_Draw_Point(GC9A01_Typedef *config,uint8_t x, uint8_t y, uint32_t color)
+{
+	uint8_t temp[3];
+	temp[0] = (color & 0xFF0000) >> 16;
+	temp[1] = (color & 0x00FF00) >> 8;
+	temp[2] = (color & 0x0000FF) >> 0;
+	GC9A01_Set_Window(config, x, y, 1, 1);
+	GC9A01_Write_Continue(config, temp, sizeof(temp));
+}
+
 void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame)
 {
 	uint8_t datax[4], datay[4];
@@ -497,8 +520,10 @@ void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame)
     datay[3] = frame.end.Y & 0xFF;
 
     Write_Command(config, ROW_ADDR_SET, 1, datay, 4);
+    Write_Command(config, 0x2C, 0, NULL, 0);
 
 }
+
 
 
 
@@ -522,4 +547,29 @@ void GC9A01_Draw_Pixel(GC9A01_Typedef *config,uint8_t x,uint8_t y, uint32_t colo
 //	for(int i = 0; i < 3; i++)
 //	SPI_TRX_Byte(&(config->SPI_Driver), temp[i]);
 //	SPI_NSS_High(&(config->SPI_Driver));
+}
+
+void GC9A01_Splash_Screen(GC9A01_Typedef *config,uint32_t color)
+{
+	gc9a01.controller = DMA2;
+	gc9a01.stream = SPI_DMA_Stream.SPI1_TX;
+	gc9a01.channel = SPI_DMA_Stream.SPI1_DMA_Channel;
+	gc9a01.circular_mode = DMA_Circular_Mode.Disable;
+	gc9a01.flow_control = DMA_Flow_Control.DMA_Control;
+	gc9a01.interrupts = DMA_Interrupts.Disable;
+	gc9a01.memory_data_size = DMA_Memory_Data_Size.byte;
+	gc9a01.peripheral_data_size = DMA_Peripheral_Data_Size.byte;
+	gc9a01.priority_level = DMA_Priority_Level.Very_high;
+	gc9a01.transfer_direction = DMA_Transfer_Direction.Memory_to_peripheral;
+	DMA_Init(&gc9a01);
+
+
+	for(int i = 0; i < 240; i++)
+	{
+		gc9a01.buffer_length = 240;
+		gc9a01.memory_address =
+
+	}
+
+
 }

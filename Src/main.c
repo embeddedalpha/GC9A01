@@ -29,6 +29,25 @@ struct GC9A01_frame frame2;
 struct GC9A01_frame frame3;
 
 volatile uint16_t buffer[240][240];
+uint8_t color[3];
+
+void GC9A01_Flash()
+{
+	frame.start.X = 0;
+	frame.start.Y =  0;
+	frame.end.X = 240;
+	frame.end.Y = 240;
+	GC9A01_Set_Frame(&display,frame);
+	color[0] = 0x00;
+	color[1] = 0x00;
+	color[2] = 0x00;
+	for (int x = 0; x < 240; x++) {
+        for (int y = 0; y < 240; y++)
+        {
+           GC9A01_Write_Continue(&display,color, sizeof(color));
+        }
+    }
+}
 
 int main(void)
 {
@@ -64,53 +83,60 @@ int main(void)
 	display.Reset_Pin = 2;
 
 	GC9A01_Init(&display);
-	uint8_t color[3];
-
-	frame.start.X = 0;
-	frame.start.Y =  0;
-	frame.end.X = 240;
-	frame.end.Y = 240;
-	GC9A01_Set_Frame(&display,frame);
-
-	color[0] = 0xff;
-	color[1] = 0xff;
-	color[2] = 0xff;
-	for (int x = 0; x < 240; x++) {
-        for (int y = 0; y < 240; y++)
-        {
-            if (x == 0 && y == 0)
-            {
-            	GC9A01_Write(&display,color, sizeof(color));
-            } else
-            {
-            	GC9A01_Write_Continue(&display,color, sizeof(color));
-            }
-        }
-    }
 
 
 
 
 
+//	for(int i = 100; i < 200; i++)
+//	{
+//		for(int j = 100; j < 200; j++)
+//		{
+//			frame.start.X = i;
+//			frame.start.Y =  i;
+//			frame.end.X = j;
+//			frame.end.Y = j;
+//			GC9A01_Set_Frame(&display,frame);
+//			GC9A01_Write_Continue(&display,color, 0xFFFFFF);
+//			Delay_s(1);
+//		}
+//	}
 
 
+	uint32_t rgb = 0xDDffEE;
 
 
-    uint8_t width = 5;
-    uint8_t height = 5;
-
-
-
-
-
-		uint32_t rgb = 0x32f454;
-//		GC9A01_Draw_Pixel(&display, 200, 200, rgb);
-//		GC9A01_Draw_Pixel(&display, 150, 150, rgb);
+		GC9A01_Draw_Pixel(&display, 120, 120, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 201, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 202, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 203, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 204, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 205, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 206, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 207, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 208, rgb);
+//		GC9A01_Draw_Pixel(&display, 200, 209, rgb);
 //		Delay_ms(900);
 
+		uint8_t width = 90;
+		uint8_t height = 90;
 
 	for(;;)
 	{
+		GC9A01_Flash();
+		Delay_s(1);
+
+		for(int i = 100; i < 200; i++)
+		{
+			GC9A01_Draw_Point(&display, i, i, 0xFFffff);
+			Delay_s(1);
+		}
+
+
+
+
+
+
 //		frame1.start.X = 40;
 //		frame1.start.Y =  70;
 //		frame1.end.X = frame1.start.X + width;
@@ -123,10 +149,10 @@ int main(void)
 //		for (int x = 0; x < width; x++) {
 //            for (int y = 0; y < height; y++)
 //            {
-//                if (x == 0 && y == 0)
-//                {
-//                	GC9A01_Write(&display,color, sizeof(color));
-//                } else
+////                if (x == 0 && y == 0)
+////                {
+////                	GC9A01_Write(&display,color, sizeof(color));
+////                } else
 //                {
 //                	GC9A01_Write_Continue(&display,color, sizeof(color));
 //                }
@@ -135,15 +161,17 @@ int main(void)
 //        }
 //            Delay_s(1);
 //
-//    		color[0] = 0xff;
-//    		color[1] = 0xff;
-//    		color[2] = 0xff;
+//    		color[0] = 0x12;
+//    		color[1] = 0x67;
+//    		color[2] = 0x98;
 //    		for (int x = 0; x < width+width; x++) {
 //                for (int y = 0; y < height+height; y++)
 //                {
-//                    if (x == 0 && y == 0) {
-//                    	GC9A01_Write(&display,color, sizeof(color));
-//                    } else {
+////                    if (x == 0 && y == 0) {
+////                    	GC9A01_Write(&display,color, sizeof(color));
+////                    }
+////                    else
+//                    {
 //                    	GC9A01_Write_Continue(&display,color, sizeof(color));
 //                    }
 //                }
@@ -151,49 +179,31 @@ int main(void)
 //                Delay_s(1);
 //
 //
-        		frame2.start.X =  100;
-        		frame2.start.Y = 100;
-        		frame2.end.X = frame2.start.X + 20;
-        		frame2.end.Y = frame2.start.Y + 20;
-        		GC9A01_Set_Frame(&display,frame2);
-
-        		color[0] = 0xff;
-        		color[1] = 0xff;
-        		color[2] = 0xff;
-        		for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < width; y++)
-                    {
-                        if (x == 0 && y == 0) {
-                        	GC9A01_Write(&display,color, sizeof(color));
-                        } else {
-                        	GC9A01_Write_Continue(&display,color, sizeof(color));
-                        }
-                    }
-                }
-                    Delay_s(1);
-
-            		color[0] = 0x55;
-            		color[1] = 0x89;
-            		color[2] = 0x70;
-            		for (int x = 0; x < width; x++) {
-                        for (int y = 0; y < width; y++)
-                        {
-                            if (x == 0 && y == 0) {
-                            	GC9A01_Write(&display,color, sizeof(color));
-                            } else {
-                            	GC9A01_Write_Continue(&display,color, sizeof(color));
-                            }
-                        }
-                    }
-                        Delay_s(1);
-
-
-//                        for(int i = 0; i < 100; i++)
+//        		frame2.start.X =  70;
+//        		frame2.start.Y = 70;
+//        		frame2.end.X = 170;
+//        		frame2.end.Y = 170;
+//        		GC9A01_Set_Frame(&display,frame2);
+//
+//        		color[0] = 0xff;
+//        		color[1] = 0xff;
+//        		color[2] = 0xff;
+//        		for (int x = 0; x < width; x++) {
+//                    for (int y = 0; y < width; y++)
+//                    {
+////                        if (x == 0 && y == 0) {
+////                        	GC9A01_Write(&display,color, sizeof(color));
+////                        }
+////                        else
 //                        {
-//                        	GC9A01_Draw_Pixel(&display, 100+i, 100+i, rgb);
-//                        	Delay_s(1);
+//                        	GC9A01_Write_Continue(&display,color, sizeof(color));
 //                        }
-
+//                    }
+//                }
+//                    Delay_s(1);
+//
+//
+//
 
 
 

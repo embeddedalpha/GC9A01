@@ -52,5 +52,8 @@ void GC9A01_Write(GC9A01_Typedef *config,uint8_t *data, size_t len);
 void GC9A01_Write_Continue(GC9A01_Typedef *config,uint8_t *data, size_t len);
 void GC9A01_Set_Frame(GC9A01_Typedef *config,struct GC9A01_frame frame);
 void GC9A01_Draw_Pixel(GC9A01_Typedef *config,uint8_t x,uint8_t y, uint32_t color);
+void GC9A01_Set_Window(GC9A01_Typedef *config,uint16_t x1, uint16_t y1, uint16_t w,
+        uint16_t h);
+void GC9A01_Draw_Point(GC9A01_Typedef *config,uint8_t x, uint8_t y, uint32_t color);
 
 #endif /* GC9A01_H_ */
