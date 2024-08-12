@@ -2,6 +2,12 @@
 
 This repository contains a comprehensive library for interfacing with the GC9A01 circular LCD display. Designed for ease of use, this library facilitates the integration of the GC9A01 display into your projects, providing vibrant and dynamic graphical capabilities for various applications.
 
+## Versions
+
+- **Version 1**
+
+- **Version 2** (Latest)
+
 ## Features
 
 - **High-Resolution Display**: Supports the full-color circular 240x240 pixel GC9A01 LCD.
