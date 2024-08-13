@@ -95,14 +95,6 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	Delay_ms(150);
 	SPI_NSS_High(&(config->SPI_Driver));
 	Delay_ms(100);
-//	SPI_NSS_High(&(config->SPI_Driver));
-//	Delay_ms(5);
-//	reset_line_low(config);
-//	Delay_ms(10);
-//	reset_line_high(config);
-//	GPIOA -> BSRR |= 1 << 2;
-
-//	Delay_ms(120);
 
 	uint8_t data[15];
 
@@ -114,204 +106,141 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	Write_Command(config, 0xFE, 0, NULL, 0);
 	Write_Command(config, 0xEF, 0, NULL, 0);
 
-//	    Command(config,0xEB);
-//	    Data(config,0x14);
+	data[0] = 0x14;
+	Write_Command(config, 0xEB, 1, data, 1);
 
-		data[0] = 0x14;
-		Write_Command(config, 0xEB, 1, data, 1);
+	data[0] = 0x40;
+	Write_Command(config, 0x84, 1, data, 1);
 
+	data[0] = 0xFF;
+	Write_Command(config, 0x85, 1, data, 1);
 
-//	    Command(config,0x84);
-//	    Data(config,0x40);
+	data[0] = 0xFF;
+	Write_Command(config, 0x86, 1, data, 1);
 
-		data[0] = 0x40;
-		Write_Command(config, 0x84, 1, data, 1);
+	data[0] = 0xFF;
+	Write_Command(config, 0x87, 1, data, 1);
 
+	data[0] = 0x0A;
+	Write_Command(config, 0x88, 1, data, 1);
 
-//	    Command(config,0x85);
-//	    Data(config,0xFF);
+	data[0] = 0x21;
+	Write_Command(config, 0x89, 1, data, 1);
 
-		data[0] = 0xFF;
-		Write_Command(config, 0x85, 1, data, 1);
+	data[0] = 0x00;
+	Write_Command(config, 0x8A, 1, data, 1);
 
-//	    Command(config,0x86);
-//	    Data(config,0xFF);
+	data[0] = 0x80;
+	Write_Command(config, 0x8B, 1, data, 1);
 
-		data[0] = 0xFF;
-		Write_Command(config, 0x86, 1, data, 1);
+	data[0] = 0x01;
+	Write_Command(config, 0x8C, 1, data, 1);
 
-//	    Command(config,0x87);
-//	    Data(config,0xFF);
+	data[0] = 0x01;
+	Write_Command(config, 0x8D, 1, data, 1);
 
-		data[0] = 0xFF;
-		Write_Command(config, 0x87, 1, data, 1);
+	data[0] = 0xFF;
+	Write_Command(config, 0x8E, 1, data, 1);
 
+	data[0] = 0xFF;
+	Write_Command(config, 0x8F, 1, data, 1);
 
-//	    Command(config,0x88);
-//	    Data(config,0x0A);
+	data[0] = 0x00;
+	data[1] = 0x00; //0x00
+	Write_Command(config, 0xb6, 1, data, 2);
 
-		data[0] = 0x0A;
-		Write_Command(config, 0x88, 1, data, 1);
+	data[0] = 0x48;
+	Write_Command(config, 0x36, 1, data, 1);
 
-//	    Command(config,0x89);
-//	    Data(config,0x21);
+	data[0] = COLOR_MODE__18_BIT;
+	Write_Command(config, COLOR_MODE, 1, data, 1);
 
-		data[0] = 0x21;
-		Write_Command(config, 0x89, 1, data, 1);
-
-
-//	    Command(config,0x8A);
-//	    Data(config,0x00);
-		data[0] = 0x00;
-		Write_Command(config, 0x8A, 1, data, 1);
-
-
-//	    Command(config,0x8B);
-//	    Data(config,0x80);
-		data[0] = 0x80;
-		Write_Command(config, 0x8B, 1, data, 1);
+	data[0] = 0x08;
+	data[1] = 0x08;
+	data[2] = 0x08;
+	data[3] = 0x08;
+	Write_Command(config, 0x90, 1, data, 4);
 
 
-//	    Command(config,0x8C);
-//	    Data(config,0x01);
-		data[0] = 0x01;
-		Write_Command(config, 0x8C, 1, data, 1);
+	data[0] = 0x06;
+	Write_Command(config, 0xBD, 1, data, 1);
 
-//	    Command(config,0x8D);
-//	    Data(config,0x01);
-		data[0] = 0x01;
-		Write_Command(config, 0x8D, 1, data, 1);
+	data[0] = 0x00;
+	Write_Command(config, 0xBC, 1, data, 1);
 
 
-//	    Command(config,0x8E);
-//	    Data(config,0xFF);
-		data[0] = 0xFF;
-		Write_Command(config, 0x8E, 1, data, 1);
-
-//	    Command(config,0x8F);
-//	    Data(config,0xFF);
-		data[0] = 0xFF;
-		Write_Command(config, 0x8F, 1, data, 1);
+	data[0] = 0x60;
+	data[1] = 0x01;
+	data[2] = 0x04;
+	Write_Command(config, 0xFF, 1, data, 3);
 
 
+	data[0] = 0x13;
+	Write_Command(config, 0xC3, 1, data, 1);
 
-//	    Command(config,0xB6);
-//	    Data(config,0x00);
-//	    Data(config,0x00);
-		data[0] = 0x00;
-		data[1] = 0x00; //0x00
-		Write_Command(config, 0xb6, 1, data, 2);
+	data[0] = 0x13;
+	Write_Command(config, 0xC4, 1, data, 1);
 
-
-
-	    data[0] = 0x48;
-		Write_Command(config, 0x36, 1, data, 1);
-
-//	#if ORIENTATION == 0
-//	    Data(config,0x18);
-//	#elif ORIENTATION == 1
-//	    Data(config,0x28);
-//	#elif ORIENTATION == 2
-////	    Command(config,0x36);
-////	    Data(config,0x48);
-//	#else
-//	    Data(config,0x88);
-//	#endif
-
-//	    Command(config,COLOR_MODE);
-//	    Data(config,COLOR_MODE__18_BIT);
-	    data[0] = COLOR_MODE__18_BIT;
-		Write_Command(config, COLOR_MODE, 1, data, 1);
+	data[0] = 0x22;
+	Write_Command(config, 0xC9, 1, data, 1);
 
 
-	    data[0] = 0x08;
-	    data[1] = 0x08;
-	    data[2] = 0x08;
-	    data[3] = 0x08;
-		Write_Command(config, 0x90, 1, data, 4);
+	data[0] = 0x11;
+	Write_Command(config, 0xBE, 1, data, 1);
+
+	data[0] = 0x10;
+	data[1] = 0x0E;
+	Write_Command(config, 0xE1, 1, data, 2);
+
+	data[0] = 0x21;
+	data[1] = 0x0c;
+	data[2] = 0x02;
+	Write_Command(config, 0xDF, 1, data, 3);
 
 
-	    data[0] = 0x06;
-		Write_Command(config, 0xBD, 1, data, 1);
+	data[0] = 0x45;
+	data[1] = 0x09;
+	data[2] = 0x08;
+	data[3] = 0x08;
+	data[4] = 0x26;
+	data[5] = 0x2A;
+	Write_Command(config, 0xF0, 1, data, 6);
 
-	    data[0] = 0x00;
-		Write_Command(config, 0xBC, 1, data, 1);
-
-
-	    data[0] = 0x60;
-	    data[1] = 0x01;
-	    data[2] = 0x04;
-		Write_Command(config, 0xFF, 1, data, 3);
-
-
-	    data[0] = 0x13;
-		Write_Command(config, 0xC3, 1, data, 1);
-
-	    data[0] = 0x13;
-		Write_Command(config, 0xC4, 1, data, 1);
-
-	    data[0] = 0x22;
-		Write_Command(config, 0xC9, 1, data, 1);
+	data[0] = 0x43;
+	data[1] = 0x70;
+	data[2] = 0x72;
+	data[3] = 0x36;
+	data[4] = 0x37;
+	data[5] = 0x6f;
+	Write_Command(config, 0xF1, 1, data, 6);
 
 
-	    data[0] = 0x11;
-		Write_Command(config, 0xBE, 1, data, 1);
+	data[0] = 0x45;
+	data[1] = 0x09;
+	data[2] = 0x08;
+	data[3] = 0x08;
+	data[4] = 0x26;
+	data[5] = 0x2A;
+	Write_Command(config, 0xF2, 1, data, 6);
 
-	    data[0] = 0x10;
-	    data[1] = 0x0E;
-		Write_Command(config, 0xE1, 1, data, 2);
+	data[0] = 0x43;
+	data[1] = 0x70;
+	data[2] = 0x72;
+	data[3] = 0x36;
+	data[4] = 0x37;
+	data[5] = 0x6F;
+	Write_Command(config, 0xF3, 1, data, 6);
 
-	    data[0] = 0x21;
-	    data[1] = 0x0c;
-	    data[2] = 0x02;
-		Write_Command(config, 0xDF, 1, data, 3);
-
-
-	    data[0] = 0x45;
-	    data[1] = 0x09;
-	    data[2] = 0x08;
-	    data[3] = 0x08;
-	    data[4] = 0x26;
-	    data[5] = 0x2A;
-		Write_Command(config, 0xF0, 1, data, 6);
-
-	    data[0] = 0x43;
-	    data[1] = 0x70;
-	    data[2] = 0x72;
-	    data[3] = 0x36;
-	    data[4] = 0x37;
-	    data[5] = 0x6f;
-		Write_Command(config, 0xF1, 1, data, 6);
+	data[0] = 0x1B;
+	data[1] = 0x0B;
+	Write_Command(config, 0xED, 1, data, 2);
 
 
-	    data[0] = 0x45;
-	    data[1] = 0x09;
-	    data[2] = 0x08;
-	    data[3] = 0x08;
-	    data[4] = 0x26;
-	    data[5] = 0x2A;
-		Write_Command(config, 0xF2, 1, data, 6);
+	data[0] = 0x77;
+	Write_Command(config, 0xAe, 1, data, 1);
 
-
-	    data[0] = 0x43;
-	    data[1] = 0x70;
-	    data[2] = 0x72;
-	    data[3] = 0x36;
-	    data[4] = 0x37;
-	    data[5] = 0x6F;
-		Write_Command(config, 0xF3, 1, data, 6);
-
-
-	    data[0] = 0x1B;
-	    data[1] = 0x0B;
-		Write_Command(config, 0xED, 1, data, 2);
-
-
-	    data[0] = 0x77;
-		Write_Command(config, 0xAe, 1, data, 1);
-
-	    data[0] = 0x63;
-		Write_Command(config, 0xCD, 1, data, 1);
+	data[0] = 0x63;
+	Write_Command(config, 0xCD, 1, data, 1);
 
 
 //	    data[0] = 0x07;
@@ -326,49 +255,49 @@ void GC9A01_Init(GC9A01_Typedef *config)
 //		Write_Command(config, 0x70, 1, data, 9);
 
 
-	    data[0] = 0x34;
-		Write_Command(config, 0xE8, 1, data, 1);
+	data[0] = 0x34;
+	Write_Command(config, 0xE8, 1, data, 1);
 
-	    data[0] = 0x18;
-	    data[1] = 0x0D;
-	    data[2] = 0x71;
-	    data[3] = 0xED;
-	    data[4] = 0x70;
-	    data[5] = 0x70;
-	    data[6] = 0x18;
-	    data[7] = 0x0F;
-	    data[8] = 0x71;
-	    data[9] = 0xEF;
-	    data[10] = 0x70;
-	    data[11] = 0x70;
-		Write_Command(config, 0x62, 1, data, 12);
-
-
-	    //
-	    data[0] = 0x18;
-	    data[1] = 0x11;
-	    data[2] = 0x71;
-	    data[3] = 0xf1;
-	    data[4] = 0x70;
-	    data[5] = 0x70;
-	    data[6] = 0x18;
-	    data[7] = 0x13;
-	    data[8] = 0x71;
-	    data[9] = 0xf3;
-	    data[10] = 0x70;
-	    data[11] = 0x70;
-		Write_Command(config, 0x63, 1, data, 12);
+	data[0] = 0x18;
+	data[1] = 0x0D;
+	data[2] = 0x71;
+	data[3] = 0xED;
+	data[4] = 0x70;
+	data[5] = 0x70;
+	data[6] = 0x18;
+	data[7] = 0x0F;
+	data[8] = 0x71;
+	data[9] = 0xEF;
+	data[10] = 0x70;
+	data[11] = 0x70;
+	Write_Command(config, 0x62, 1, data, 12);
 
 
-	    //
-	    data[0] = 0x28;
-	    data[1] = 0x29;
-	    data[2] = 0xf1;
-	    data[3] = 0x01;
-	    data[4] = 0xf1;
-	    data[5] = 0x00;
-	    data[6] = 0x07;
-		Write_Command(config, 0x64, 1, data, 7);
+	//
+	data[0] = 0x18;
+	data[1] = 0x11;
+	data[2] = 0x71;
+	data[3] = 0xf1;
+	data[4] = 0x70;
+	data[5] = 0x70;
+	data[6] = 0x18;
+	data[7] = 0x13;
+	data[8] = 0x71;
+	data[9] = 0xf3;
+	data[10] = 0x70;
+	data[11] = 0x70;
+	Write_Command(config, 0x63, 1, data, 12);
+
+
+	//
+	data[0] = 0x28;
+	data[1] = 0x29;
+	data[2] = 0xf1;
+	data[3] = 0x01;
+	data[4] = 0xf1;
+	data[5] = 0x00;
+	data[6] = 0x07;
+	Write_Command(config, 0x64, 1, data, 7);
 
 //	    Command(config,0x66);
 //	    Data(config,0x3C);
@@ -382,17 +311,17 @@ void GC9A01_Init(GC9A01_Typedef *config)
 //	    Data(config,0x00);
 //	    Data(config,0x00);
 	    //
-	    data[0] = 0x3c;
-	    data[1] = 0x00;
-	    data[2] = 0xcd;
-	    data[3] = 0x67;
-	    data[4] = 0x45;
-	    data[5] = 0x45;
-	    data[6] = 0x10;
-	    data[7] = 0x00;
-	    data[8] = 0x00;
-	    data[9] = 0x00;
-		Write_Command(config, 0x66, 1, data, 10);
+	data[0] = 0x3c;
+	data[1] = 0x00;
+	data[2] = 0xcd;
+	data[3] = 0x67;
+	data[4] = 0x45;
+	data[5] = 0x45;
+	data[6] = 0x10;
+	data[7] = 0x00;
+	data[8] = 0x00;
+	data[9] = 0x00;
+	Write_Command(config, 0x66, 1, data, 10);
 
 //	    Command(config,0x67);
 //	    Data(config,0x00);
@@ -406,17 +335,17 @@ void GC9A01_Init(GC9A01_Typedef *config)
 //	    Data(config,0x32);
 //	    Data(config,0x98);
 	    //
-	    data[0] = 0x00;
-	    data[1] = 0x3c;
-	    data[2] = 0x00;
-	    data[3] = 0x00;
-	    data[4] = 0x00;
-	    data[5] = 0x01;
-	    data[6] = 0x54;
-	    data[7] = 0x10;
-	    data[8] = 0x32;
-	    data[9] = 0x98;
-		Write_Command(config, 0x67, 1, data, 10);
+	data[0] = 0x00;
+	data[1] = 0x3c;
+	data[2] = 0x00;
+	data[3] = 0x00;
+	data[4] = 0x00;
+	data[5] = 0x01;
+	data[6] = 0x54;
+	data[7] = 0x10;
+	data[8] = 0x32;
+	data[9] = 0x98;
+	Write_Command(config, 0x67, 1, data, 10);
 
 //	    Command(config,0x74);
 //	    Data(config,0x10);
@@ -427,35 +356,35 @@ void GC9A01_Init(GC9A01_Typedef *config)
 //	    Data(config,0x4E);
 //	    Data(config,0x00);
 	    //
-	    data[0] = 0x10;
-	    data[1] = 0x85;
-	    data[2] = 0x80;
-	    data[3] = 0x00;
-	    data[4] = 0x00;
-	    data[5] = 0x4e;
-	    data[6] = 0x00;
-		Write_Command(config, 0x74, 1, data, 7);
+	data[0] = 0x10;
+	data[1] = 0x85;
+	data[2] = 0x80;
+	data[3] = 0x00;
+	data[4] = 0x00;
+	data[5] = 0x4e;
+	data[6] = 0x00;
+	Write_Command(config, 0x74, 1, data, 7);
 
-	    //
-	    data[0] = 0x3e;
-	    data[1] = 0x07;
-		Write_Command(config, 0x98, 1, data, 2);
+	//
+	data[0] = 0x3e;
+	data[1] = 0x07;
+	Write_Command(config, 0x98, 1, data, 2);
 
 //	    Command(config,0x35);
-	    Write_Command(config, 0x35, 0, NULL, 0);
+	Write_Command(config, 0x35, 0, NULL, 0);
 
 //	    Command(config,0x21);
-	    Write_Command(config, 0x21, 0, NULL, 0);
+	Write_Command(config, 0x21, 0, NULL, 0);
 
 
-	    data[0] = 0x80;
-	    Write_Command(config, 0x11, 1, data, 1);
-	    Delay_ms(120);
+	data[0] = 0x80;
+	Write_Command(config, 0x11, 1, data, 1);
+	Delay_ms(120);
 
-	    data[0] = 0x80;
-	    data[1] = 0x00;
-	    Write_Command(config, 0x29, 1, data, 2);
-	    Delay_ms(20);
+	data[0] = 0x80;
+	data[1] = 0x00;
+	Write_Command(config, 0x29, 1, data, 2);
+	Delay_ms(20);
 }
 
 void GC9A01_Write(GC9A01_Typedef *config,uint8_t *data, size_t len) {
