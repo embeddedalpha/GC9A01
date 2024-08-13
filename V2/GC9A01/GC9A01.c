@@ -81,9 +81,9 @@ void GC9A01_Init(GC9A01_Typedef *config)
 	SPI_Init(&(config->SPI_Driver));
 	SPI_Enable(&(config->SPI_Driver));
 
-	GPIO_Pin_Init(config->DC_Port, config->DC_Pin, MODE.General_Purpose_Output, Output_Type.Push_Pull, Speed.Very_High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.None);
+	GPIO_Pin_Init(config->DC_Port, config->DC_Pin, GPIO_Configuration.Mode.General_Purpose_Output, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.None);
 
-	GPIO_Pin_Init(config->Reset_Port, config->Reset_Pin, MODE.General_Purpose_Output, Output_Type.Push_Pull, Speed.Very_High_Speed, Pull.No_Pull_Up_Down, Alternate_Functions.None);
+	GPIO_Pin_Init(config->Reset_Port, config->Reset_Pin, GPIO_Configuration.Mode.General_Purpose_Output, GPIO_Configuration.Output_Type.Push_Pull, GPIO_Configuration.Speed.Very_High_Speed, GPIO_Configuration.Pull.No_Pull_Up_Down, GPIO_Configuration.Alternate_Functions.None);
 
 
 	SPI_NSS_Low(&(config->SPI_Driver));
@@ -551,23 +551,22 @@ void GC9A01_Draw_Pixel(GC9A01_Typedef *config,uint8_t x,uint8_t y, uint32_t colo
 
 void GC9A01_Splash_Screen(GC9A01_Typedef *config,uint32_t color)
 {
-	gc9a01.controller = DMA2;
-	gc9a01.stream = SPI_DMA_Stream.SPI1_TX;
-	gc9a01.channel = SPI_DMA_Stream.SPI1_DMA_Channel;
-	gc9a01.circular_mode = DMA_Circular_Mode.Disable;
-	gc9a01.flow_control = DMA_Flow_Control.DMA_Control;
-	gc9a01.interrupts = DMA_Interrupts.Disable;
-	gc9a01.memory_data_size = DMA_Memory_Data_Size.byte;
-	gc9a01.peripheral_data_size = DMA_Peripheral_Data_Size.byte;
-	gc9a01.priority_level = DMA_Priority_Level.Very_high;
-	gc9a01.transfer_direction = DMA_Transfer_Direction.Memory_to_peripheral;
+//	gc9a01.controller = DMA2;
+//	gc9a01.stream = SPI_DMA_Stream.SPI1_TX;
+//	gc9a01.channel = SPI_DMA_Stream.SPI1_DMA_Channel;
+//	gc9a01.circular_mode = DMA_Circular_Mode.Disable;
+//	gc9a01.flow_control = DMA_Flow_Control.DMA_Control;
+//	gc9a01.interrupts = DMA_Interrupts.Disable;
+//	gc9a01.memory_data_size = DMA_Memory_Data_Size.byte;
+//	gc9a01.peripheral_data_size = DMA_Peripheral_Data_Size.byte;
+//	gc9a01.priority_level = DMA_Priority_Level.Very_high;
+//	gc9a01.transfer_direction = DMA_Transfer_Direction.Memory_to_peripheral;
 	DMA_Init(&gc9a01);
 
 
 	for(int i = 0; i < 240; i++)
 	{
 		gc9a01.buffer_length = 240;
-		gc9a01.memory_address =
 
 	}
 
