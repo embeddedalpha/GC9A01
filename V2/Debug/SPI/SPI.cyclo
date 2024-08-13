@@ -1,0 +1,11 @@
+../SPI/SPI.c:13:8:SPI_Clock_Enable	4
+../SPI/SPI.c:24:8:SPI_Clock_Disable	4
+../SPI/SPI.c:36:8:SPI_Config_Reset	4
+../SPI/SPI.c:61:13:SPI_Pin_Init	53
+../SPI/SPI.c:182:6:SPI_Init	7
+../SPI/SPI.c:300:6:SPI_Enable	1
+../SPI/SPI.c:307:6:SPI_DeInit	4
+../SPI/SPI.c:315:10:SPI_TRX_Byte	5
+../SPI/SPI.c:328:6:SPI_TRX_Buffer	8
+../SPI/SPI.c:360:6:SPI_NSS_High	1
+../SPI/SPI.c:365:6:SPI_NSS_Low	1

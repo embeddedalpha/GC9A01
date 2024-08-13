@@ -1,0 +1,17 @@
+../Inc/main.h:133:26:Delay_ms	2
+../GC9A01/GC9A01.c:15:13:command_line_high	1
+../GC9A01/GC9A01.c:20:13:command_line_low	1
+../GC9A01/GC9A01.c:25:13:reset_line_high	1
+../GC9A01/GC9A01.c:30:13:reset_line_low	1
+../GC9A01/GC9A01.c:36:13:Command	1
+../GC9A01/GC9A01.c:44:13:Data	1
+../GC9A01/GC9A01.c:52:6:GC9A01_DeInit	1
+../GC9A01/GC9A01.c:61:13:Write_Command	3
+../GC9A01/GC9A01.c:78:6:GC9A01_Init	1
+../GC9A01/GC9A01.c:461:6:GC9A01_Write	2
+../GC9A01/GC9A01.c:471:6:GC9A01_Write_Continue	2
+../GC9A01/GC9A01.c:482:6:GC9A01_Set_Window	1
+../GC9A01/GC9A01.c:496:6:GC9A01_Draw_Point	1
+../GC9A01/GC9A01.c:506:6:GC9A01_Set_Frame	1
+../GC9A01/GC9A01.c:530:6:GC9A01_Draw_Pixel	1
+../GC9A01/GC9A01.c:552:6:GC9A01_Splash_Screen	2

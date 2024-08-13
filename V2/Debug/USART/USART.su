@@ -1,0 +1,10 @@
+../Inc/main.h:173:22:separateFractionAndIntegral	24	static
+../USART/USART.c:14:6:USART_Config_Reset	16	static
+../USART/USART.c:24:8:USART_Clock_Enable	16	static
+../USART/USART.c:58:8:USART_Clock_Disable	16	static
+../USART/USART.c:91:13:PIN_Setup	40	static
+../USART/USART.c:296:8:USART_Init	48	static
+../USART/USART.c:326:6:USART_TX_Buffer	32	static
+../USART/USART.c:343:6:USART_RX_Buffer	32	static
+../USART/USART.c:360:6:USART_TX_Single_Byte	16	static
+../USART/USART.c:366:10:USART_RX_Single_Byte	24	static
