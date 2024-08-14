@@ -20,6 +20,8 @@
 #include "stdint.h"
 #include "system_stm32f4xx.h"
 
+
+
 typedef struct Interrupts
 {
 	bool Enable;
