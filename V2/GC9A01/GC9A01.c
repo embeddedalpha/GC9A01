@@ -33,21 +33,6 @@ static void reset_line_low(GC9A01_Typedef *config)
 
 }
 
-static void Command(GC9A01_Typedef *config,uint8_t command)
-{
-	command_line_low(config);
-	SPI_NSS_Low(&(config->SPI_Driver));
-	SPI_TRX_Byte(&(config->SPI_Driver), command);
-	SPI_NSS_High(&(config->SPI_Driver));
-}
-
-static void Data(GC9A01_Typedef *config,uint8_t data)
-{
-	command_line_high(config);
-	SPI_NSS_Low(&(config->SPI_Driver));
-	SPI_TRX_Byte(&(config->SPI_Driver), data);
-	SPI_NSS_High(&(config->SPI_Driver));
-}
 
 void GC9A01_DeInit(GC9A01_Typedef *config)
 {
