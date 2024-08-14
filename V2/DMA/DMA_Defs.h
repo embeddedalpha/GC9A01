@@ -10,6 +10,17 @@
 
 #include "main.h"
 
+
+typedef struct DMA_Flags_Typedef
+{
+	bool Transfer_Complete_Flag;
+	bool Half_Transfer_Complete_Flag;
+	bool Transfer_Error_Flag;
+	bool Direct_Mode_Error_Flag;
+	bool Fifo_Error_Flag;
+
+}DMA_Flags_Typedef;
+
 typedef struct DMA_Request {
 	DMA_TypeDef *Controller;
 	DMA_Stream_TypeDef *Stream;
@@ -182,6 +193,7 @@ static const struct DMA_Configuration {
 		uint32_t Half_Transfer_Complete;
 		uint32_t Transfer_Error;
 		uint32_t Direct_Mode_Error;
+		uint32_t Fifo_Error;
 		uint32_t Disable;
 
 	}DMA_Interrupts;
@@ -202,6 +214,15 @@ static const struct DMA_Configuration {
 
 
 } DMA_Configuration = {
+
+		.DMA_Interrupts = {
+				.Transfer_Complete = 1 << 4,
+				.Half_Transfer_Complete = 1 << 3,
+				.Transfer_Error = 1 << 2,
+				.Direct_Mode_Error = 1 << 1,
+				.Fifo_Error = 1 << 7,
+				.Disable = 0 << 1,
+		},
 
 		.Flow_Control = {
 				.DMA_Control = 0 << 5,
