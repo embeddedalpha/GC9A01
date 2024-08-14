@@ -7,7 +7,7 @@
 
 
 #include "Console.h"
-#include "DMA.h"
+
 
 USART_Config serial;
 DMA_Config serial_DMA;
@@ -38,8 +38,8 @@ char buff[10000];
 	vsprintf(buff, msg, args);
 
 	serial_DMA.Request = DMA_Configuration.Request.USART1_TX;
-	serial_DMA.Flow_control = DMA_Configuration.Flow_Control.DMA_Control;
-	serial_DMA.Transfer_direction = DMA_Configuration.Transfer_Direction.Memory_to_peripheral;
+	serial_DMA.flow_control = DMA_Configuration.Flow_Control.DMA_Control;
+	serial_DMA.transfer_direction = DMA_Configuration.Transfer_Direction.Memory_to_peripheral;
 	serial_DMA.circular_mode = DMA_Configuration.Circular_Mode.Enable;
 	serial_DMA.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
 	serial_DMA.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;

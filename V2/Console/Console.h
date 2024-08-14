@@ -11,7 +11,7 @@
 #include "main.h"
 #include "GPIO.h"
 #include "USART.h"
-
+#include "DMA.h"
 
 
 void Console_Init(int32_t baudrate);
