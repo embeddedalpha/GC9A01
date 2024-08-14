@@ -23,7 +23,7 @@ typedef struct GPIO_Pin
  * @param  Port: Pointer to GPIO port base address.
  * @param  pin: Pin number to set low (0-15).
  */
-inline void GPIO_Pin_Low(GPIO_TypeDef *Port, int pin)
+__STATIC_INLINE  void GPIO_Pin_Low(GPIO_TypeDef *Port, int pin)
 {
 	Port -> ODR &= ~(1 << pin);
 }
@@ -33,7 +33,7 @@ inline void GPIO_Pin_Low(GPIO_TypeDef *Port, int pin)
  * @param  Port: Pointer to GPIO port base address.
  * @retval Port input data register value.
  */
-inline uint16_t GPIO_Port_Read(GPIO_TypeDef *Port)
+__STATIC_INLINE  uint16_t GPIO_Port_Read(GPIO_TypeDef *Port)
 {
 	return Port -> IDR;
 }
@@ -43,7 +43,7 @@ inline uint16_t GPIO_Port_Read(GPIO_TypeDef *Port)
  * @param  Port: Pointer to GPIO port base address.
  * @param  data: Data to be written to the port output data register.
  */
-inline void GPIO_Write_Port(GPIO_TypeDef *Port, uint16_t data)
+__STATIC_INLINE  void GPIO_Write_Port(GPIO_TypeDef *Port, uint16_t data)
 {
 	Port -> ODR = data;
 }
@@ -54,7 +54,7 @@ inline void GPIO_Write_Port(GPIO_TypeDef *Port, uint16_t data)
  * @param  pin: Pin number to read (0-15).
  * @retval Pin state (0 or 1).
  */
-inline uint16_t GPIO_Read_Pin(GPIO_TypeDef *Port, uint8_t pin)
+__STATIC_INLINE  uint16_t GPIO_Read_Pin(GPIO_TypeDef *Port, uint8_t pin)
 {
 	return (Port->IDR & (1<<pin)) >> pin;
 }
@@ -65,7 +65,7 @@ inline uint16_t GPIO_Read_Pin(GPIO_TypeDef *Port, uint8_t pin)
  * @param  Port: Pointer to GPIO port base address.
  * @param  pin: Pin number to set high (0-15).
  */
-inline void GPIO_Pin_High(GPIO_TypeDef *Port, int pin)
+__STATIC_INLINE  void GPIO_Pin_High(GPIO_TypeDef *Port, int pin)
 {
 	Port -> ODR = 1 << pin;
 }
