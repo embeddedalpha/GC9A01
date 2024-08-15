@@ -42,9 +42,9 @@ struct GC9A01_point {
     uint16_t X, Y;
 };
 
-struct GC9A01_frame {
+typedef struct GC9A01_frame {
     struct GC9A01_point start, end;
-};
+}GC9A01_frame;
 
 void GC9A01_DeInit(GC9A01_Typedef *config);
 void GC9A01_Init(GC9A01_Typedef *config);
@@ -55,5 +55,6 @@ void GC9A01_Draw_Pixel(GC9A01_Typedef *config,uint8_t x,uint8_t y, uint32_t colo
 void GC9A01_Set_Window(GC9A01_Typedef *config,uint16_t x1, uint16_t y1, uint16_t w,
         uint16_t h);
 void GC9A01_Draw_Point(GC9A01_Typedef *config,uint8_t x, uint8_t y, uint32_t color);
-
+void GC9A01_Splash_Screen(GC9A01_Typedef *config, uint16_t color);
+void GC9A01_Draw_Mercury(GC9A01_Typedef *config);
 #endif /* GC9A01_H_ */

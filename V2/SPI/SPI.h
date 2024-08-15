@@ -14,6 +14,9 @@
 #include "SPI_Defs.h"
 
 
+
+
+
 typedef struct SPI_Config
 {
 	SPI_TypeDef *Port;

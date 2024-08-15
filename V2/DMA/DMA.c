@@ -642,6 +642,9 @@ void DMA_Init(DMA_Config *config)
 
 void DMA_Set_Target(DMA_Config *config)
 {
+	config -> Request.Stream -> CR &= ~(DMA_SxCR_MSIZE | DMA_SxCR_PSIZE);
+	config -> Request.Stream -> CR |= config -> peripheral_data_size;
+	config -> Request.Stream -> CR |= config -> memory_data_size;
 	config -> Request.Stream ->NDTR = config -> buffer_length;
 	config -> Request.Stream ->M0AR = (uint32_t)config->memory_address;
 	config -> Request.Stream ->PAR = (uint32_t)config->peripheral_address;
@@ -686,3 +689,64 @@ void DMA_Set_Trigger(DMA_Config *config)
 
 
 
+void DMA_Memory_To_Memory_Transfer(uint32_t *source,
+						  uint8_t source_data_size, uint8_t dest_data_size,
+		                  uint32_t *destination, bool source_increment,
+						  bool destination_increment, uint16_t length)
+{
+
+	RCC -> AHB1ENR |= RCC_AHB1ENR_DMA2EN;
+	DMA2_Stream0->CR &= (DMA_SxCR_CHSEL);
+	DMA2_Stream0->CR |= DMA_Configuration.Transfer_Direction.Memory_to_memory;
+	DMA2_Stream0->CR |= (DMA_SxCR_TCIE | DMA_SxCR_PL);
+
+	if(source_data_size == 32)
+	{
+		DMA2_Stream0->CR |= DMA_SxCR_PSIZE;
+	}else if(source_data_size == 16)
+	{
+		DMA2_Stream0->CR |= DMA_SxCR_PSIZE_0;
+		DMA2_Stream0->CR &= ~DMA_SxCR_PSIZE_1;
+	}else
+	{
+		DMA2_Stream0->CR &= ~DMA_SxCR_PSIZE;
+	}
+
+	if(dest_data_size == 32)
+	{
+		DMA2_Stream0->CR |= DMA_SxCR_MSIZE;
+	}else if(dest_data_size == 16)
+	{
+		DMA2_Stream0->CR |= DMA_SxCR_MSIZE_0;
+		DMA2_Stream0->CR &= ~DMA_SxCR_MSIZE_1;
+	}else
+	{
+		DMA2_Stream0->CR &= ~DMA_SxCR_MSIZE;
+	}
+
+	if(source_increment == 1)
+	{
+		DMA2_Stream0->CR |= DMA_SxCR_PINC;
+	}
+	else{
+		DMA2_Stream0->CR &= ~DMA_SxCR_PINC;
+	}
+
+	if(destination_increment == 1)
+	{
+		DMA2_Stream0->CR |= DMA_SxCR_MINC;
+	}
+	else{
+		DMA2_Stream0->CR &= ~DMA_SxCR_MINC;
+	}
+
+	DMA2_Stream0 -> PAR = (uint32_t)(source);
+	DMA2_Stream0 -> M0AR = (uint32_t)(destination);
+	DMA2_Stream0 -> NDTR = (uint16_t)length;
+	DMA2_Stream0 -> CR |= DMA_SxCR_EN;
+
+	while((DMA2 -> LISR & (DMA_LISR_TCIF0_Msk)) == 0){}
+	DMA2 -> LIFCR |= DMA_LIFCR_CTCIF0;
+
+	DMA2_Stream0 -> CR &= ~DMA_SxCR_EN;
+}

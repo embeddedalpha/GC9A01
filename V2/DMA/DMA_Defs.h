@@ -215,6 +215,16 @@ static const struct DMA_Configuration {
 
 } DMA_Configuration = {
 
+		.Memory_Pointer_Increment = {
+				.Enable = 1 << 10,
+				.Disable = 0 << 10,
+		},
+
+		.Peripheral_Pointer_Increment = {
+				.Enable = 1 << 9,
+				.Disable = 0 << 9,
+		},
+
 		.DMA_Interrupts = {
 				.Transfer_Complete = 1 << 4,
 				.Half_Transfer_Complete = 1 << 3,
@@ -233,7 +243,7 @@ static const struct DMA_Configuration {
 		{
 			.Peripheral_to_memory = 0 << 6,
 			.Memory_to_peripheral = 1 << 6,
-			.Memory_to_memory = 1 << 6,
+			.Memory_to_memory = 2 << 6,
 		},
 
 		.Priority_Level =
@@ -242,6 +252,20 @@ static const struct DMA_Configuration {
 			.Medium = 1 << 16,
 			.High = 2 << 16,
 			.Very_high = 3 << 16,
+		},
+
+		.Memory_Data_Size = {
+
+				.byte = 0 << 13,
+				.half_word = 1 << 13,
+				.word = 2 << 13,
+
+		},
+
+		.Peripheral_Data_Size = {
+				.byte = 0 << 11,
+				.half_word = 1 << 11,
+				.word = 2 << 11,
 		},
 
 		.Request = {

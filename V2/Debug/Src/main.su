@@ -4,4 +4,4 @@
 ../Inc/main.h:110:26:Delay_Config	4	static
 ../Inc/main.h:135:26:Delay_ms	24	static
 ../Inc/main.h:146:26:Delay_s	16	static
-../Src/main.c:18:5:main	115224	static
+../Src/main.c:20:5:main	8	static
