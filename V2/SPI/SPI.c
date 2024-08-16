@@ -420,6 +420,7 @@ int8_t SPI_TRX_Buffer(SPI_Config *config, uint16_t *tx_buffer,uint16_t *rx_buffe
 			if(config->data_format == SPI_Configurations.Data_Format.Bit8) xDMA1_TX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.byte;
 			else if(config->data_format == SPI_Configurations.Data_Format.Bit16) xDMA1_TX.peripheral_data_size = DMA_Configuration.Peripheral_Data_Size.half_word;
 			xDMA1_TX.buffer_length = tx_length + 2;
+			xDMA1_TX.memory_pointer_increment = DMA_Configuration.Memory_Pointer_Increment.Enable;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			xDMA1_RX.memory_address = (uint32_t)&rx_buffer[0];
 			if(config->data_format == SPI_Configurations.Data_Format.Bit8) xDMA1_TX.memory_data_size = DMA_Configuration.Memory_Data_Size.byte;
