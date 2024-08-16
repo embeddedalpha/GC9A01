@@ -67,7 +67,7 @@ __STATIC_INLINE  uint16_t GPIO_Read_Pin(GPIO_TypeDef *Port, uint8_t pin)
  */
 __STATIC_INLINE  void GPIO_Pin_High(GPIO_TypeDef *Port, int pin)
 {
-	Port -> ODR = 1 << pin;
+	Port -> ODR |= 1 << pin;
 }
 
 
