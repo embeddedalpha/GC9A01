@@ -16,6 +16,6 @@ B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/GPIO/GPIO.h:68:23:GPIO_Pin_High	1
 ../SPI/SPI.c:386:6:SPI_DeInit	4
 ../SPI/SPI.c:394:10:SPI_TRX_Byte	5
 ../SPI/SPI.c:409:8:SPI_TRX_Buffer	32
-../SPI/SPI.c:511:6:SPI_NSS_High	1
-../SPI/SPI.c:516:6:SPI_Data_Format_Update	3
-../SPI/SPI.c:524:6:SPI_NSS_Low	1
+../SPI/SPI.c:512:6:SPI_NSS_High	1
+../SPI/SPI.c:517:6:SPI_Data_Format_Update	3
+../SPI/SPI.c:525:6:SPI_NSS_Low	1

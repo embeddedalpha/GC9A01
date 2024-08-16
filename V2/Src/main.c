@@ -47,33 +47,20 @@ int main(void)
 	GC9A01_Driver.SPI_Driver.prescaler = SPI_Configurations.Prescaler.CLK_div_2;
 	GC9A01_Driver.SPI_Driver.type = SPI_Configurations.Type.Master;
 	GC9A01_Init(&GC9A01_Driver);
-
-
-	GC9A01_Splash_Screen(&GC9A01_Driver, 0xFf00);
-	Delay_s(1);
-	GC9A01_Splash_Screen(&GC9A01_Driver, 0x00FF);
+	GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
 	Delay_s(1);
 
 
-//	uint16_t color;
-//
-//	uint16_t red = 0x00;
-//	uint16_t green = 0x00;
-//	uint16_t blue = 0x00;
-//
-//	int i  = 0;
+	GC9A01_Draw_Mercury(&GC9A01_Driver);
+
+
+
+
+	uint16_t color_16_bit = 0;
 
 	for(;;)
 	{
 
-//		if(i >= 65535)
-//		{
-//			i = 0;
-//		}
-//		color = i;
-//		GC9A01_Splash_Screen(&GC9A01_Driver, color);
-//		i += 1;
-//		Delay_ms(100);
 
 
 

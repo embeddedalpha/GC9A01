@@ -21,5 +21,5 @@
 ../DMA/DMA.c:584:6:DMA_Reset	16	static
 ../DMA/DMA.c:590:6:DMA_Init	16	static
 ../DMA/DMA.c:643:6:DMA_Set_Target	16	static
-../DMA/DMA.c:654:6:DMA_Set_Trigger	32	static
-../DMA/DMA.c:692:6:DMA_Memory_To_Memory_Transfer	24	static
+../DMA/DMA.c:655:6:DMA_Set_Trigger	32	static
+../DMA/DMA.c:693:6:DMA_Memory_To_Memory_Transfer	24	static
