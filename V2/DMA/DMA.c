@@ -642,10 +642,11 @@ void DMA_Init(DMA_Config *config)
 
 void DMA_Set_Target(DMA_Config *config)
 {
-	config -> Request.Stream -> CR &= ~(DMA_SxCR_MSIZE | DMA_SxCR_PSIZE);
+	config -> Request.Stream -> CR &= ~(DMA_SxCR_MSIZE | DMA_SxCR_PSIZE | DMA_SxCR_MINC);
 	config -> Request.Stream -> CR |= config -> peripheral_data_size;
 	config -> Request.Stream -> CR |= config -> memory_data_size;
 	config -> Request.Stream ->NDTR = config -> buffer_length;
+	config -> Request.Stream -> CR |= config -> memory_pointer_increment;
 	config -> Request.Stream ->M0AR = (uint32_t)config->memory_address;
 	config -> Request.Stream ->PAR = (uint32_t)config->peripheral_address;
 }
