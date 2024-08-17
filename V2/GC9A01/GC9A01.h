@@ -46,6 +46,12 @@ typedef struct GC9A01_frame {
     struct GC9A01_point start, end;
 }GC9A01_frame;
 
+#define Orientation_1 0x18
+#define Orientation_2 0x28
+#define Orientation_3 0x48
+#define Orientation_4 0x88
+
+void GC9A01_Set_Orientation(GC9A01_Typedef *config, uint8_t orientation);
 void GC9A01_DeInit(GC9A01_Typedef *config);
 void GC9A01_Init(GC9A01_Typedef *config);
 void GC9A01_Write(GC9A01_Typedef *config,uint8_t *data, size_t len);
