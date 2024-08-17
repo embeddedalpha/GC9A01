@@ -126,7 +126,7 @@ __STATIC_INLINE void Delay_DeInit(void)
 __STATIC_INLINE uint32_t Delay_us(float us)
 {
 
-	SysTick->LOAD = 167 * us;
+	SysTick->LOAD = 168 * us;
 	SysTick->VAL = 0;
 	while((SysTick->CTRL & 0x00010000) == 0);
 	return (0UL);                                                     /* Function successful */
@@ -140,6 +140,15 @@ __STATIC_INLINE uint32_t Delay_ms(float ms)
 	SysTick->CTRL |= 1;
 	while((SysTick->CTRL & 0x00010000) == 0);
 	return (0UL);                                                     /* Function successful */
+}
+
+
+__STATIC_INLINE uint32_t Delay_milli(float ms)
+{
+	for (; ms>0; ms--)
+	{
+		Delay_ms(1);
+	}
 }
 
 

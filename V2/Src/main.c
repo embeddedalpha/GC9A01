@@ -12,6 +12,7 @@
 
 #include "main.h"
 #include "GC9A01.h"
+#include "GPIO.h"
 
 SPI_Config x;
 
@@ -21,6 +22,8 @@ int main(void)
 {
 	MCU_Clock_Setup();
 	Delay_Config();
+
+
 
 
 
@@ -47,19 +50,39 @@ int main(void)
 	GC9A01_Driver.SPI_Driver.prescaler = SPI_Configurations.Prescaler.CLK_div_2;
 	GC9A01_Driver.SPI_Driver.type = SPI_Configurations.Type.Master;
 	GC9A01_Init(&GC9A01_Driver);
-	GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
+//	GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
 	Delay_s(1);
 
 
-	GC9A01_Draw_Mercury(&GC9A01_Driver);
 
-
-
-
-	uint16_t color_16_bit = 0;
+//
+//
+//
+//
+//	uint16_t color_16_bit = 0;
 
 	for(;;)
 	{
+		GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
+		GC9A01_Set_Orientation(&GC9A01_Driver, Orientation_1);
+		GC9A01_Draw_Mercury(&GC9A01_Driver);
+		Delay_milli(1000);
+
+		GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
+		GC9A01_Set_Orientation(&GC9A01_Driver, Orientation_2);
+		GC9A01_Draw_Mercury(&GC9A01_Driver);
+		Delay_milli(1000);
+
+		GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
+		GC9A01_Set_Orientation(&GC9A01_Driver, Orientation_3);
+		GC9A01_Draw_Mercury(&GC9A01_Driver);
+		Delay_milli(1000);
+
+//		GC9A01_Splash_Screen(&GC9A01_Driver, 0xFFFF);
+//		GC9A01_Set_Orientation(&GC9A01_Driver, Orientation_);
+//		GC9A01_Draw_Mercury(&GC9A01_Driver);
+//		Delay_milli(1000);
+
 
 
 

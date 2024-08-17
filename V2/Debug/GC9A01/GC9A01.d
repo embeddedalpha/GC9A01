@@ -8,7 +8,7 @@ GC9A01/GC9A01.o: ../GC9A01/GC9A01.c ../GC9A01/GC9A01.h ../Inc/main.h \
  B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/DMA/DMA.h \
  B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/DMA/DMA_Defs.h \
  B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/SPI/SPI_Defs.h \
- ../GC9A01/GC9A01_Defs.h
+ ../GC9A01/GC9A01_Defs.h ../GC9A01/Image.h
 ../GC9A01/GC9A01.h:
 ../Inc/main.h:
 ../Inc/stm32f407xx.h:
@@ -26,3 +26,4 @@ B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/DMA/DMA.h:
 B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/DMA/DMA_Defs.h:
 B:/STM32F407V_Firmware_C_Lang/GC9A01_V2/SPI/SPI_Defs.h:
 ../GC9A01/GC9A01_Defs.h:
+../GC9A01/Image.h:
